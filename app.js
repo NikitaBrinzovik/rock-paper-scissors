@@ -1,6 +1,5 @@
-
-import {capitalizeFirstChar, logWinner, writeRoundResult} from "./helpers/helpers";
 import {CHOICES, ERRORS, RESULTS} from "./consts/consts";
+import {capitalizeFirstChar, logWinner, writeRoundResult} from "./helpers/helpers";
 
 /** How many rounds will player play before game will be over */
 const roundsCounts = 5;
@@ -63,9 +62,7 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === CHOICES.Scissors && computerSelection === CHOICES.Paper)
     ) {
         return writeRoundResult(RESULTS.win, capitalizeFirstChar(playerSelection), computerSelection);
-        // return `${RESULTS.win} ${capitalizeFirstChar(playerSelection)} beats ${computerSelection}.`;
     }
 
-        // return `${RESULTS.win} ${capitalizeFirstChar(playerSelection)} beats ${computerSelection}.`;
     return writeRoundResult(RESULTS.lose, capitalizeFirstChar(computerSelection), playerSelection);
 }
