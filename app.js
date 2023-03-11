@@ -17,6 +17,7 @@ const roundsCounts = 5;
 
         if (result.startsWith(RESULTS.win)) playerScore++;
         if (result.startsWith(RESULTS.lose)) computerScore++;
+        if (result.startsWith(ERRORS.inputError)) i--;
     }
 
     if (playerScore > computerScore) {
