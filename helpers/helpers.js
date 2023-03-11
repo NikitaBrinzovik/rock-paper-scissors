@@ -1,3 +1,4 @@
+/** Capitalizing only first char of prop string. */
 export const capitalizeFirstChar = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
 /**

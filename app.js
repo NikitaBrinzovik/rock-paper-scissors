@@ -1,5 +1,5 @@
-import {CHOICES, ERRORS, RESULTS} from "./consts/consts";
-import {capitalizeFirstChar, logWinner, writeRoundResult} from "./helpers/helpers";
+import {CHOICES, ERRORS, RESULTS} from "./consts/consts.js";
+import {capitalizeFirstChar, logWinner, writeRoundResult} from "./helpers/helpers.js";
 
 /** How many rounds will player play before game will be over */
 const roundsCounts = 5;

@@ -1,2 +1,4 @@
 # rock-paper-scissors
-homework 
+Homework from Brainnest
+
+Deployment: https://nikitabrinzovik.github.io/rock-paper-scissors/
