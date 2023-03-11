@@ -46,7 +46,7 @@ function computerPlay() {
  * @return {string} declaring the winner of the round.
  */
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection.trim().toLowerCase();
 
     if (!Object.values(CHOICES).includes(playerSelection)) {
         return ERRORS.inputError;
