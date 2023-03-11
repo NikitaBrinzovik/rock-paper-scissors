@@ -10,8 +10,7 @@ const roundsCounts = 5;
     let computerScore = 0;
 
     for (let i = 1; i <= roundsCounts; i++) {
-        let playerSelection = prompt(`Round ${i}: Rock, Paper, or Scissors?`);
-        let result = playRound(playerSelection, computerPlay());
+        let result = playRound(playerPlay(i), computerPlay());
 
         console.log(`Round ${i}: ${result}`);
 
@@ -32,6 +31,13 @@ const roundsCounts = 5;
 })()
 
 /**
+ * Returns a player input selection of Rock, Paper, or Scissors.
+ * @return {string} A player chosen selection.
+ */
+function playerPlay(roundNumber) {
+    return  prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`);
+}
+/**
  * Returns a random selection of Rock, Paper, or Scissors.
  * @return {string} A randomly chosen selection.
  */
@@ -47,7 +53,7 @@ function computerPlay() {
  * @return {string} declaring the winner of the round.
  */
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.trim().toLowerCase();
+    playerSelection = playerSelection?.trim().toLowerCase();
 
     if (!Object.values(CHOICES).includes(playerSelection)) {
         return ERRORS.inputError;
