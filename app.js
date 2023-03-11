@@ -1,5 +1,10 @@
 import {CHOICES, ERRORS, RESULTS} from "./consts/consts.js";
-import {capitalizeFirstChar, logWinner, writeRoundResult} from "./helpers/helpers.js";
+import {
+    capitalizeFirstChar,
+    logWinner,
+    trimAndLowercase,
+    writeRoundResult
+} from "./helpers/helpers.js";
 
 /** How many rounds will player play before game will be over */
 const roundsCounts = 5;
@@ -8,15 +13,18 @@ const roundsCounts = 5;
 (function game() {
     let playerScore = 0;
     let computerScore = 0;
+    let score;
 
     for (let i = 1; i <= roundsCounts; i++) {
-        let result = playRound(playerPlay(i), computerPlay());
+        score = playRound(playerPlay(i), computerPlay());
 
-        console.log(`Round ${i}: ${result}`);
+        if (score.startsWith(RESULTS.abort)) return;
 
-        if (result.startsWith(RESULTS.win)) playerScore++;
-        if (result.startsWith(RESULTS.lose)) computerScore++;
-        if (result.startsWith(ERRORS.inputError)) i--;
+        console.log(`Round ${i}: ${score}`);
+
+        if (score.startsWith(RESULTS.win)) playerScore++;
+        if (score.startsWith(RESULTS.lose)) computerScore++;
+        if (score.startsWith(RESULTS.continue) ||score.startsWith(ERRORS.inputError)) i--;
     }
 
     if (playerScore > computerScore) {
@@ -35,12 +43,15 @@ const roundsCounts = 5;
  * @return {string} A player chosen selection.
  */
 function playerPlay(roundNumber) {
-    return  prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`);
+    const playersChoice =  prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`);
+    return  playersChoice !== null ? playersChoice : abortGame();
 }
+
 /**
  * Returns a random selection of Rock, Paper, or Scissors.
  * @return {string} A randomly chosen selection.
  */
+
 function computerPlay() {
     const randomIndex = Math.floor(Math.random() * Object.keys(CHOICES).length);
     return Object.values(CHOICES)[randomIndex];
@@ -53,16 +64,13 @@ function computerPlay() {
  * @return {string} declaring the winner of the round.
  */
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection?.trim().toLowerCase();
+    playerSelection = trimAndLowercase(playerSelection);
 
-    if (!Object.values(CHOICES).includes(playerSelection)) {
-        return ERRORS.inputError;
-    }
+    if (playerSelection.startsWith(RESULTS.abort)) return RESULTS.abort;
+    if (playerSelection.startsWith(RESULTS.continue)) return RESULTS.continue;
+    if (!Object.values(CHOICES).includes(playerSelection)) return ERRORS.inputError;
 
-    if (playerSelection === computerSelection) {
-        return RESULTS.tie;
-    }
-
+    if (playerSelection === computerSelection) return RESULTS.tie;
     if (
         (playerSelection === CHOICES.Rock && computerSelection === CHOICES.Scissors) ||
         (playerSelection === CHOICES.Paper && computerSelection === CHOICES.Rock) ||
@@ -72,4 +80,16 @@ function playRound(playerSelection, computerSelection) {
     }
 
     return writeRoundResult(RESULTS.lose, capitalizeFirstChar(computerSelection), playerSelection);
+}
+
+/** Call new prompt-window to abort the game or return playing. */
+function  abortGame() {
+    const isAbort = prompt('Do you want to finish this game? Type "no" - to return in game.')
+
+    if(isAbort !== null &&  trimAndLowercase(isAbort) !== 'no'){
+        console.log("Oh! That's your choice - you will regret!")
+        return RESULTS.abort;
+    }
+
+    return RESULTS.continue
 }

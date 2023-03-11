@@ -16,3 +16,9 @@ export const logWinner = (res, winner, loser) => console.log(`${res} ${winner} t
  * @param  {string} losersChoice - Losers choice.
  */
 export const writeRoundResult = (res, winnersChoice, losersChoice) => `${res} ${winnersChoice} beats ${losersChoice}.`
+
+/**
+ * Decorate string to lowercase and removing spaces if string has value
+ * @param  {string} string - fashion-model that needed to be cut =)
+ * */
+export const trimAndLowercase = (string) => string?.trim().toLowerCase()

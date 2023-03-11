@@ -8,6 +8,8 @@ export const RESULTS = Object.freeze({
     tie: 'Tie!',
     win: 'You win!',
     lose: 'You lose!',
+    abort: 'abort!',
+    continue: 'lets continue!',
 })
 
 export const ERRORS = Object.freeze({
