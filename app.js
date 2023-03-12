@@ -24,7 +24,7 @@ const roundsCounts = 5;
 
         if (score.startsWith(RESULTS.win)) playerScore++;
         if (score.startsWith(RESULTS.lose)) computerScore++;
-        if (score.startsWith(RESULTS.continue) ||score.startsWith(ERRORS.inputError)) i--;
+        if (score.startsWith(RESULTS.continue) || score.startsWith(ERRORS.inputError)) i--;
     }
 
     if (playerScore > computerScore) {
@@ -43,15 +43,14 @@ const roundsCounts = 5;
  * @return {string} A player chosen selection.
  */
 function playerPlay(roundNumber) {
-    const playersChoice =  prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`);
-    return  playersChoice !== null ? playersChoice : abortGame();
+    const playersChoice = prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`);
+    return playersChoice !== null ? playersChoice : abortGame();
 }
 
 /**
  * Returns a random selection of Rock, Paper, or Scissors.
  * @return {string} A randomly chosen selection.
  */
-
 function computerPlay() {
     const randomIndex = Math.floor(Math.random() * Object.keys(CHOICES).length);
     return Object.values(CHOICES)[randomIndex];
@@ -83,12 +82,12 @@ function playRound(playerSelection, computerSelection) {
 }
 
 /** Call new prompt-window to abort the game or return playing. */
-function  abortGame() {
+function abortGame() {
     const isAbort = prompt('Well, well, well, do you desire to conclude this amusingly' +
         ' entertaining activity? Please type "no" to continue indulging in this fascinating game,' +
         ' or type "yes" to abandon this magnificent creation of the almighty megabrain!')
 
-    if(isAbort !== null &&  trimAndLowercase(isAbort) !== 'no'){
+    if (isAbort !== null && trimAndLowercase(isAbort) !== 'no') {
         console.log("Oh! That's your choice - you will regret!")
         return RESULTS.abort;
     }
