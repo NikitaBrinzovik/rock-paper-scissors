@@ -1,4 +1,4 @@
-import {CHOICES, ERRORS, RESULTS} from "./consts/consts.js";
+import {CHOICES, ERRORS, RESULTS, MESSAGE} from "./consts/consts.js";
 import {
     capitalizeFirstChar,
     logWinner,
@@ -83,12 +83,10 @@ function playRound(playerSelection, computerSelection) {
 
 /** Call new prompt-window to abort the game or return playing. */
 function abortGame() {
-    const isAbort = prompt('Well, well, well, do you desire to conclude this amusingly' +
-        ' entertaining activity? Please type "no" to continue indulging in this fascinating game,' +
-        ' or type "yes" to abandon this magnificent creation of the almighty megabrain!')
+    const isAbort = prompt(MESSAGE.abortOrContinue)
 
     if (isAbort !== null && trimAndLowercase(isAbort) !== 'no') {
-        console.log("Oh! That's your choice - you will regret!")
+        console.log(MESSAGE.abort)
         return RESULTS.abort;
     }
 
